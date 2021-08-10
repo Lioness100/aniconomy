@@ -1,0 +1,6 @@
+{
+  "extends": "@lioness100/ts-config",
+  "compilerOptions": { 
+    "skipLibCheck": true
+  }
+}
