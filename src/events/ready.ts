@@ -2,21 +2,30 @@ import type { EventOptions, Events, Piece, Store } from '@sapphire/framework';
 import { Event } from '@sapphire/framework';
 import { ApplyOptions } from '@sapphire/decorators';
 import { blue, gray, green, magenta, magentaBright, bold } from 'colorette';
-import { readFileSync } from 'fs';
+import { readFile } from 'fs/promises';
+
+const store = JSON.parse(await readFile('./data/store.json', { encoding: 'utf-8' }));
 
 @ApplyOptions<EventOptions>({ once: true })
 export default class UserEvent extends Event<Events.Ready> {
-  public run() {
-    this.printBanner();
+  public async run() {
+    await this.printBanner();
     this.printStoreDebugInformation();
+
+    const { client } = this.context;
+    if (!client.eco.shop.list(client.guild.id).length) {
+      for (const { item, price } of store) {
+        client.eco.shop.addItem(this.context.client.guild.id, { itemName: item, price });
+      }
+    }
   }
 
   /**
    * print a colorful banner with the version and name
    */
-  private printBanner() {
+  private async printBanner() {
     const { version, name }: Record<string, string> = JSON.parse(
-      readFileSync('./package.json').toString()
+      await readFile('./package.json', { encoding: 'utf-8' })
     );
 
     const success = green('+');

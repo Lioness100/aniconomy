@@ -6,3 +6,6 @@ dist/
 
 # Environment variables
 .env
+
+**/giveaways.json
+**/storage.json

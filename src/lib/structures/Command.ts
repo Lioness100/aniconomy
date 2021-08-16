@@ -76,5 +76,5 @@ export abstract class Command extends BaseCommand {
 export interface CommandOptions extends BaseCommandOptions {
   usage?: string;
   cooldown?: number;
-  permissions?: PermissionString;
+  permissions?: PermissionString[];
 }

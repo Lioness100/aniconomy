@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-namespace */
 import { bold, red } from 'colorette';
 import { isNullishOrEmpty } from '@sapphire/utilities';
-import type { ActivityType } from 'discord.js';
+import type { ActivityType, Snowflake } from 'discord.js';
 import { Util } from 'discord.js';
+import { SnowflakeRegex } from '@sapphire/discord.js-utilities';
 
-const TokenRegex = /^[MN][A-Za-z\d]{23}\.[\w-]{6}\.[\w-]{27}$/;
+const TokenRegex = /^[A-Za-z\d]{24}\.[\w-]{6}\.[\w-]{27}$/;
 
 export default interface IProcessEnv {
   TOKEN: string;
@@ -12,6 +12,13 @@ export default interface IProcessEnv {
   COLOR: string;
   PRESENCE_NAME: string;
   PRESENCE_TYPE: ActivityType;
+  MONGO_URI: string;
+  GIVEAWAY_CHANNEL_ID: Snowflake;
+  GIVEAWAY_ROLE_ID: Snowflake;
+  ANNOUNCEMENT_CHANNEL_ID: Snowflake;
+  ANNOUNCEMENT_ROLE_ID: Snowflake;
+  LOG_CHANNEL_ID: Snowflake;
+  OWNER_ID: Snowflake;
 }
 
 /**
@@ -39,6 +46,13 @@ const type = process.env.PRESENCE_TYPE;
 const types = ['PLAYING', 'LISTENING', 'WATCHING', 'COMPETING'];
 
 has('PREFIX');
+has('MONGO_URI');
+has('GIVEAWAY_ROLE_ID', (val) => !SnowflakeRegex.test(val) && 'is not a valid role ID');
+has('GIVEAWAY_CHANNEL_ID', (val) => !SnowflakeRegex.test(val) && 'is not a valid channel ID');
+has('ANNOUNCEMENT_ROLE_ID', (val) => !SnowflakeRegex.test(val) && 'is not a valid role ID');
+has('ANNOUNCEMENT_CHANNEL_ID', (val) => !SnowflakeRegex.test(val) && 'is not a valid channel ID');
+has('LOG_CHANNEL_ID', (val) => !SnowflakeRegex.test(val) && 'is not a valid channel ID', false);
+has('OWNER_ID', (val) => !SnowflakeRegex.test(val) && 'is not a valid user ID');
 has('TOKEN', (val) => !TokenRegex.test(val) && 'is not a valid token');
 has('COLOR', (val) => !Util.resolveColor(val) && 'is not a valid color');
 has('PRESENCE_NAME', (val) => val && !type && 'must be coupled with "BOT_PRESENCE_TYPE"', false);

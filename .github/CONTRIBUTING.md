@@ -4,7 +4,7 @@
 have a question, please ask me directly on Discord (Lioness100#4566) instead of
 opening an issue**
 
-If you wish to contribute to the ~name~ project's codebase or documentation, feel
+If you wish to contribute to the aniconomy project's codebase or documentation, feel
 free to fork the repository and submit a pull request. For larger changes,
 please open an issue first so we can discuss.
 

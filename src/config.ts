@@ -8,7 +8,6 @@ const name = process.env.PRESENCE_NAME;
 const type = process.env.PRESENCE_TYPE;
 
 const options: SapphireClientOptions & ClientOptions = {
-  allowedMentions: { parse: ['users', 'roles'] },
   caseInsensitiveCommands: true,
   caseInsensitivePrefixes: true,
   fetchPrefix: (message) => (message.guild ? prefix : [prefix, '']),
@@ -18,7 +17,12 @@ const options: SapphireClientOptions & ClientOptions = {
   },
   messageCacheMaxSize: 25,
   ws: {
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES],
+    intents: [
+      Intents.FLAGS.GUILDS,
+      Intents.FLAGS.GUILD_MESSAGES,
+      Intents.FLAGS.DIRECT_MESSAGES,
+      Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+    ],
   },
 };
 

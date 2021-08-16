@@ -6,4 +6,5 @@ export const enum Preconditions {
   NSFW = 'NSFW',
   Permissions = 'Permissions',
   OwnerOnly = 'OwnerOnly',
+  ModOnly = 'ModOnly',
 }

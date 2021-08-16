@@ -1,11 +1,12 @@
 import '#env';
 import '#ext';
 import '@skyra/editable-commands';
-import { SapphireClient } from '@sapphire/framework';
 import { yellow, green, bold } from 'colorette';
-import config from '#root/config';
+import mongoConnect from '#lib/database/index';
+import Client from '#structures/Client';
 
-const client = new SapphireClient(config);
+const client = new Client();
+mongoConnect();
 
 try {
   client.logger.info(yellow('Logging in'));

@@ -1,7 +1,12 @@
 import esbuild from 'esbuild';
-import { opendir } from 'fs/promises';
+import typescript from 'typescript';
+import { opendir, readFile } from 'fs/promises';
 import { join } from 'path';
 import { fileURLToPath, URL } from 'url';
+
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const tsConfig = require('@lioness100/ts-config');
 
 /**
  * scan a directory recursively and return the file names
@@ -48,11 +53,27 @@ export async function build(watch = false) {
     write: true,
     outdir: fileURLToPath(distFolder),
     platform: 'node',
+    plugins: [{ name: 'tsc', setup: pluginTsc }],
     tsconfig: join(fileURLToPath(srcFolder), 'tsconfig.json'),
     watch,
     incremental: watch,
     sourcemap: true,
     external: [],
     minify: process.env.NODE_ENV === 'production',
+  });
+}
+
+/**
+ * use tsc to compile the /database/entities/ directories
+ * because it makes use of `emitDecoratorMetadata`,
+ * which is not supported with native esbuild
+ * @param {esbuild.PluginBuild} build - the build process
+ */
+function pluginTsc(build) {
+  build.onLoad({ filter: /entities/ }, async (args) => {
+    const ts = await readFile(args.path, 'utf8');
+    const program = typescript.transpileModule(ts, tsConfig);
+
+    return { contents: program.outputText };
   });
 }

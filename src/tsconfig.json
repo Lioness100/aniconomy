@@ -10,10 +10,10 @@
       "#env": ["lib/env"],
       "#ext": ["lib/extensions"],
       "#ext/*": ["lib/extensions/*"],
-      "#structures": ["lib/structures"],
       "#structures/*": ["lib/structures/*"],
-      "#types/*": ["lib/types/*"]
-    }
+      "#types/*": ["lib/types/*"],
+      "#entities/*": ["lib/database/entities/*"]
+    },
   },
   "include": ["."]
 }
