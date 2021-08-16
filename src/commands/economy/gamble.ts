@@ -13,7 +13,6 @@ import { Preconditions } from '#types/Enums';
   ].join(' '),
   usage: '<bet> [heads | tails]',
   preconditions: [Preconditions.GuildOnly],
-  cooldown: 120000,
 })
 export class UserCommand extends Command {
   public async run(message: Message, args: Args) {

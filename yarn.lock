@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@androz2091/discord-invites-tracker@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@androz2091/discord-invites-tracker/-/discord-invites-tracker-0.1.2.tgz#13852a2c8d0272f6cf816b2ed0047513df40485d"
+  integrity sha512-/UvbVS2MJTwyBCYsJ/ET9mvKSS+2WRC5sI/Pax/+rNH29+bUw4aqqAPsGLbkzZb5lcdrg8vysfib9FpXdAqZ5g==
+
 "@babel/code-frame@7.12.11":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"

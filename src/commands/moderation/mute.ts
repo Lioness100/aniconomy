@@ -81,28 +81,20 @@ export class UserCommand extends Command {
       void channel.send(embed).catch(() => null);
     }
 
-    const wrap = (fn: () => unknown) => () => void fn();
+    setTimeout(() => {
+      member.roles.remove(role).catch(() => null);
+      if (process.env.LOG_CHANNEL_ID) {
+        const embed = message
+          .embed(`${member.user.tag} (${member}) has been unmuted`)
+          .addField('❯ Original Reason:', reason)
+          .setFooter(`Muted by ${message.author.tag}`, message.author.displayAvatarURL())
+          .setTimestamp();
 
-    setTimeout(
-      wrap(async () => {
-        if (member.roles.cache.has(role.id)) {
-          await member.roles.remove(role);
-        }
-
-        if (process.env.LOG_CHANNEL_ID) {
-          const embed = message
-            .embed(`${member.user.tag} (${member}) has been unmuted`)
-            .addField('❯ Original Reason:', reason)
-            .setFooter(`Muted by ${message.author.tag}`, message.author.displayAvatarURL())
-            .setTimestamp();
-
-          const channel = message.guild!.channels.cache.get(
-            process.env.LOG_CHANNEL_ID
-          ) as TextChannel;
-          void channel.send(embed).catch(() => null);
-        }
-      }),
-      duration
-    );
+        const channel = message.guild!.channels.cache.get(
+          process.env.LOG_CHANNEL_ID
+        ) as TextChannel;
+        void channel.send(embed).catch(() => null);
+      }
+    }, duration);
   }
 }

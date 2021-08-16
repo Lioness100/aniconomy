@@ -1,6 +1,6 @@
 import type { SapphireClientOptions } from '@sapphire/framework';
-import { LogLevel } from '@sapphire/framework';
 import type { ClientOptions } from 'discord.js';
+import { LogLevel } from '@sapphire/framework';
 import { Intents } from 'discord.js';
 
 const prefix = process.env.PREFIX;

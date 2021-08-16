@@ -7,11 +7,11 @@ import { Preconditions } from '#types/Enums';
 import blackjack from 'discord-blackjack';
 
 @ApplyOptions<CommandOptions>({
+  aliases: ['bj'],
   description: 'Gamble some money in blackjack',
   detailedDescription: 'Gamble up to $50 in a game of blackjack!',
   usage: '<bet>',
   preconditions: [Preconditions.GuildOnly],
-  cooldown: 120000,
 })
 export class UserCommand extends Command {
   public async run(message: Message, args: Args) {

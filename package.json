@@ -30,6 +30,7 @@
     "typecheck": "tsc -p src --noEmit"
   },
   "dependencies": {
+    "@androz2091/discord-invites-tracker": "^0.1.2",
     "@sapphire/decorators": "^2.2.0",
     "@sapphire/discord.js-utilities": "^2.0.2",
     "@sapphire/fetch": "^1.0.5",

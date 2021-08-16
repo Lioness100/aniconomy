@@ -12,7 +12,6 @@ const items = ['🍒', '🍓', '🍉', '🍌', '🍪', '🍏', '🍎'];
   detailedDescription: 'Gamble up to $50 in a slot machine!',
   usage: '<bet>',
   preconditions: [Preconditions.GuildOnly],
-  cooldown: 120000,
 })
 export class UserCommand extends Command {
   public async run(message: Message, args: Args) {

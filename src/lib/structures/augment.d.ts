@@ -1,5 +1,6 @@
 import type { ArgType } from '@sapphire/framework';
 import type { Guild } from 'discord.js';
+import type { init } from '@androz2091/discord-invites-tracker';
 import type DiscordGiveaways from 'discord-giveaways';
 import type Economy from 'discord-economy-super';
 
@@ -23,5 +24,6 @@ declare module '@sapphire/framework' {
     eco: Economy;
     giveaways: DiscordGiveaways.GiveawaysManager;
     guild: Guild;
+    invites: ReturnType<typeof init>;
   }
 }

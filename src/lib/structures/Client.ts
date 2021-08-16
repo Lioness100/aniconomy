@@ -1,4 +1,5 @@
 import { SapphireClient } from '@sapphire/framework';
+import { init } from '@androz2091/discord-invites-tracker';
 import Economy from 'discord-economy-super';
 import DiscordGiveaways from 'discord-giveaways';
 import options from '#root/config';
@@ -17,15 +18,18 @@ Object.defineProperty(ecoOptions, 'workAmount', {
 export default class Client extends SapphireClient {
   public eco = new (Economy as new (options: unknown) => Economy)(ecoOptions);
   public giveaways: DiscordGiveaways.GiveawaysManager;
+  public invites: ReturnType<typeof init>;
 
   public constructor() {
     super(options);
 
+    this.invites = init(this, { fetchAuditLogs: false, fetchGuilds: true, fetchVanity: false });
     this.giveaways = new DiscordGiveaways.GiveawaysManager(this, { updateCountdownEvery: 10000 });
   }
 
   /* one guild functionality */
   public get guild() {
+    // return this.guilds.cache.get('876788647410683945')!;
     return this.guilds.cache.first()!;
   }
 }
