@@ -62,7 +62,7 @@ export class UserCommand extends Command {
         giveawayEnded: `<@&${process.env.GIVEAWAY_ROLE_ID}>\n**Giveaway Ended**`,
         embedFooter: 'Enter Now!',
         hostedBy: `Hosted by: {user}${
-          level && invites
+          level || invites
             ? `\n${level ? `\n**You must be at least level ${parseInt(level)} to enter!**` : ''}${
                 invites
                   ? `\n**You must have invited at least ${parseInt(

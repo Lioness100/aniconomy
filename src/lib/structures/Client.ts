@@ -23,13 +23,12 @@ export default class Client extends SapphireClient {
   public constructor() {
     super(options);
 
-    this.invites = init(this, { fetchAuditLogs: false, fetchGuilds: true, fetchVanity: false });
+    this.invites = init(this, { fetchAuditLogs: true, fetchGuilds: true, fetchVanity: true });
     this.giveaways = new DiscordGiveaways.GiveawaysManager(this, { updateCountdownEvery: 10000 });
   }
 
   /* one guild functionality */
   public get guild() {
-    // return this.guilds.cache.get('876788647410683945')!;
     return this.guilds.cache.first()!;
   }
 }
