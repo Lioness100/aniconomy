@@ -49,6 +49,7 @@
     "discord-voice": "^2.0.3",
     "discord.js": "12.5.3",
     "dotenv": "10.0.0",
+    "mal-scraper": "^2.11.3",
     "millify": "^4.0.0",
     "mongoose": "5.13.6",
     "ms": "2.1.3",
