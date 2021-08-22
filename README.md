@@ -26,3 +26,5 @@ To run the bot on a VPS, you'll need to transfer the folder you downloaded local
 Locally, you'll need to open Command Prompt on Windows, or the Terminal on Linux or Mac. Use the command `cd path` to navigate to the bot's folder. For example: `cd C:\Users\xxx\OneDrive\Desktop\name`
 
 Now, for both VPS and local, you'll need to run `yarn`, wait a few seconds, and then run `yarn setup`. **The bot is now operational ! 🎉**
+
+**TIP**: You can set role rewards for levels in [`data/level-roles.json`](./data/level-roles.json)
