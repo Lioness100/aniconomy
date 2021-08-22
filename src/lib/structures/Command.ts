@@ -39,7 +39,7 @@ export abstract class Command extends BaseCommand {
    * @param message - personalized error message
    * @example await handleArgs(args.pick('string'), 'Please provide a valid string argument');
    */
-  protected handleArgs<T extends ArgType[keyof ArgType]>(
+  protected handleArgs<T extends ArgType[keyof ArgType] | Array<ArgType[keyof ArgType]>>(
     getArg: Promise<T>,
     message: string
   ): Promise<T> {

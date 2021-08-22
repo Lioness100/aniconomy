@@ -1,3 +1,4 @@
+import type { CustomVoiceManager } from '#structures/VoiceManager';
 import type { ArgType } from '@sapphire/framework';
 import type { Guild } from 'discord.js';
 import type { init } from '@androz2091/discord-invites-tracker';
@@ -25,5 +26,6 @@ declare module '@sapphire/framework' {
     giveaways: DiscordGiveaways.GiveawaysManager;
     guild: Guild;
     invites: ReturnType<typeof init>;
+    voiceTime: CustomVoiceManager;
   }
 }

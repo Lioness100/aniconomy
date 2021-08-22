@@ -1,5 +1,5 @@
 {
-  "extends": "@lioness100/ts-config",
+  "extends": "@lioness100/ts-config/index.json",
   "compilerOptions": { 
     "skipLibCheck": true
   }

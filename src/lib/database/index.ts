@@ -10,6 +10,7 @@ const mongoConnect = () => {
       .connect(process.env.MONGO_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useFindAndModify: false,
       })
       .then(() => logger.info(blueBright(`${bold('[Database]')} Successfully connected.`)))
       .catch((error) => {

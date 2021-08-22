@@ -17,7 +17,8 @@ export default interface IProcessEnv {
   GIVEAWAY_ROLE_ID: Snowflake;
   ANNOUNCEMENT_CHANNEL_ID: Snowflake;
   ANNOUNCEMENT_ROLE_ID: Snowflake;
-  LOG_CHANNEL_ID: Snowflake;
+  LOG_CHANNEL_ID?: Snowflake;
+  POLL_CHANNEL_ID: Snowflake;
   OWNER_ID: Snowflake;
 }
 
@@ -52,6 +53,7 @@ has('GIVEAWAY_CHANNEL_ID', (val) => !SnowflakeRegex.test(val) && 'is not a valid
 has('ANNOUNCEMENT_ROLE_ID', (val) => !SnowflakeRegex.test(val) && 'is not a valid role ID');
 has('ANNOUNCEMENT_CHANNEL_ID', (val) => !SnowflakeRegex.test(val) && 'is not a valid channel ID');
 has('LOG_CHANNEL_ID', (val) => !SnowflakeRegex.test(val) && 'is not a valid channel ID', false);
+has('POLL_CHANNEL_ID', (val) => !SnowflakeRegex.test(val) && 'is not a valid channel ID');
 has('OWNER_ID', (val) => !SnowflakeRegex.test(val) && 'is not a valid user ID');
 has('TOKEN', (val) => !TokenRegex.test(val) && 'is not a valid token');
 has('COLOR', (val) => !Util.resolveColor(val) && 'is not a valid color');

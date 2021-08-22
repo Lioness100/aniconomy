@@ -11,27 +11,33 @@ export class UserEvent extends Event<Events.Message> {
       return;
     }
 
-    if (this.cooldowns.has(message.author.id)) {
-      return;
-    }
-
-    if (message.content.replace(new RegExp(EmojiRegex.source.slice(1, -1)), ' ').length < 10) {
-      return;
-    }
-
-    this.cooldowns.add(message.author.id);
-    setTimeout(() => this.cooldowns.delete(message.author.id), 30000);
-
     const user = await Levels.ensure(message.author.id);
-    const hasLeveledUp = await user.addXp(this.context.client, Math.ceil(Math.random() * 50));
+    user.messages++;
 
-    await user.save();
-    if (hasLeveledUp) {
-      return message.channel.send(
-        message
-          .embed(`You leveled up to ${user.level}! 🎉🎉`)
-          .setFooter(`Congrats! You need ${Levels.xpFor(user.level + 1)} to level up again1`)
-      );
-    }
+    const addXp = async () => {
+      if (this.cooldowns.has(message.author.id)) {
+        return;
+      }
+
+      if (message.content.replace(new RegExp(EmojiRegex.source.slice(1, -1)), ' ').length < 10) {
+        return;
+      }
+
+      this.cooldowns.add(message.author.id);
+      setTimeout(() => this.cooldowns.delete(message.author.id), 30000);
+
+      const hasLeveledUp = await user.addXp(this.context.client, Math.ceil(Math.random() * 50));
+
+      if (hasLeveledUp) {
+        return message.channel.send(
+          message
+            .embed(`You leveled up to ${user.level}! 🎉🎉`)
+            .setFooter(`Congrats! You need ${Levels.xpFor(user.level + 1)} to level up again1`)
+        );
+      }
+    };
+
+    await addXp();
+    return user.save();
   }
 }

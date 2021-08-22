@@ -17,7 +17,7 @@ export class UserCommand extends Command {
     const target = await args.pick('user').catch(() => message.author);
     const isMe = target.id === message.author.id;
 
-    const user = await Levels.findById(target.id);
+    const user = await Levels.findById(target.id).lean().select(['xp', 'level']);
     if (!user?.xp) {
       throw `${isMe ? 'You have' : `<@${target.id}> has`} no xp!`;
     }

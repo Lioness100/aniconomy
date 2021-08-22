@@ -1,6 +1,5 @@
 import type { DocumentType, ReturnModelType } from '@typegoose/typegoose';
-import { getModelForClass } from '@typegoose/typegoose';
-import { prop } from '@typegoose/typegoose';
+import { getModelForClass, modelOptions, prop, Severity } from '@typegoose/typegoose';
 import { readFile } from 'fs/promises';
 import type Client from '#structures/Client';
 import Entity from '#entities/Entity';
@@ -14,12 +13,22 @@ const rewards: Reward[] = JSON.parse(
   await readFile('./data/level-roles.json', { encoding: 'utf-8' })
 );
 
+@modelOptions({ options: { allowMixed: Severity.ALLOW } })
 export class Levels extends Entity {
   @prop({ default: 0 })
   public xp!: number;
 
   @prop({ default: 0 })
   public level!: number;
+
+  @prop({ default: 0 })
+  public voiceTime!: number;
+
+  @prop({ default: [] })
+  public channels!: unknown[];
+
+  @prop({ default: 0 })
+  public messages!: number;
 
   /**
    * adds xp to a user

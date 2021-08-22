@@ -1,6 +1,7 @@
 import type { EventOptions, Events, Piece, Store } from '@sapphire/framework';
 import { Event } from '@sapphire/framework';
 import { ApplyOptions } from '@sapphire/decorators';
+import { cDefault, CustomVoiceManager } from '#structures/VoiceManager';
 import { blue, gray, green, magenta, magentaBright, bold } from 'colorette';
 import { readFile } from 'fs/promises';
 
@@ -18,6 +19,9 @@ export default class UserEvent extends Event<Events.Ready> {
         client.eco.shop.addItem(this.context.client.guild.id, { itemName: item, price });
       }
     }
+
+    // @ts-ignore bad typings
+    client.voiceTime = new CustomVoiceManager(client, cDefault);
   }
 
   /**

@@ -1,3 +1,4 @@
+import type { CustomVoiceManager } from '#structures/VoiceManager';
 import { SapphireClient } from '@sapphire/framework';
 import { init } from '@androz2091/discord-invites-tracker';
 import Economy from 'discord-economy-super';
@@ -18,6 +19,7 @@ Object.defineProperty(ecoOptions, 'workAmount', {
 export default class Client extends SapphireClient {
   public eco = new (Economy as new (options: unknown) => Economy)(ecoOptions);
   public giveaways: DiscordGiveaways.GiveawaysManager;
+  public voiceTime!: CustomVoiceManager;
   public invites: ReturnType<typeof init>;
 
   public constructor() {
