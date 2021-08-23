@@ -1,4 +1,4 @@
-import type { Message } from 'discord.js';
+import type { Message, TextChannel } from 'discord.js';
 import type { Args } from '@sapphire/framework';
 import { ApplyOptions } from '@sapphire/decorators';
 import type { CommandOptions } from '#structures/Command';
@@ -20,6 +20,10 @@ export class UserCommand extends Command {
 
     if (!anime) {
       throw 'No results were found!';
+    }
+
+    if (anime.genres?.includes('Hentai') && !(message.channel as TextChannel).nsfw) {
+      throw "You can't look up hentai in a non-NSFW channel!";
     }
 
     const color = await getColor(anime.picture).catch(() => process.env.COLOR);

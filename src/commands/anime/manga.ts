@@ -1,4 +1,4 @@
-import type { Message } from 'discord.js';
+import type { Message, TextChannel } from 'discord.js';
 import type { Args } from '@sapphire/framework';
 import { ApplyOptions } from '@sapphire/decorators';
 import type { CommandOptions } from '#structures/Command';
@@ -43,6 +43,14 @@ export class UserCommand extends Command {
     }
 
     const manga = await Jikan.manga(result.mal_id).info();
+
+    if (
+      manga.genres?.some(({ name }) => name === 'Hentai') &&
+      !(message.channel as TextChannel).nsfw
+    ) {
+      throw "You can't look up hentai in a non-NSFW channel!";
+    }
+
     const color = await getColor(manga.image_url).catch(() => process.env.COLOR);
 
     return message.embed(
